@@ -9,28 +9,27 @@
 '''
 
 def numberOfLines(widths, S):
+    if len(S) == 0:
+        return [0,0]
     map = {}
     init = 97
     for i in widths:
         map[chr(init)]=i
         init =init+1
-    res1=0
-    res2=0
-    sum=0
-    for j in S:
-        if sum-100<=map[j]:
-            sum =map[j]-sum+100
-            res2=map[j]-sum
-            res1=res1+1
-        else:
-            sum = sum+map[j]
+    sum = 0
+    res1 = 1
+    for i in S[0:len(S)]:
+        sum =sum+map[i]
+        if sum>100:
+            res1 = res1 +1
+            sum = map[i]
+    return [res1,sum]
 
 
-    return [res1,res2]
 
+widths = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+S = "abcdefghijklmnopqrstuvwxyz"
 
-widths = [4,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
-S = "bbbcccdddaaa"
 
 print(numberOfLines(widths,S))
 
